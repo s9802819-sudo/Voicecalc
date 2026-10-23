@@ -66,7 +66,8 @@ object SpeechParser {
         }
         for (t in normalize(raw).split(Regex("\\s+"))) {
             if (t.isEmpty()) continue
-            ops[t]?.let { op(it); continue }
+                        val o = ops[t]
+            if (o != null) { op(o); continue }
             if (t in point) { inNum = true; frac = StringBuilder(); continue }
             if (num.matches(t)) {
                 if (frac != null && !t.contains('.')) { frac?.append(t); continue }
